@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: glue-discovery
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: glue-discovery
+  template:
+    metadata:
+      labels:
+        app: glue-discovery
+    spec:
+      containers:
+        - image: gcu-dudezi-dev.kr-central-2.kcr.dev/glue-repository/glue-discovery:latest
+          name: glue-discovery-server
+          ports:
+            - containerPort: 8761
+      imagePullSecrets:
+        - name: glue-repository
